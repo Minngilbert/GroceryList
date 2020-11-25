@@ -1,0 +1,80 @@
+<div class="container">
+    <h2>All Grocery Lists</h2>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createGroceryList">New List</button>
+    <table *ngIf= "groceryLists != undefined" class="table table-hover">
+        <tr *ngFor="let groceryList of groceryLists">
+            <td routerLink='../viewListItems/{{groceryList.listId}}'>{{groceryList["listName"]}}</td>
+            <td><button (click)="setCurrItemId(groceryList)" type="button" class="btn btn-info" data-toggle="modal" data-target="#editItem">
+                edit</button></td>
+            <td><button (click)="removeGroceryList(groceryList)" type="button" class="btn btn-danger">delete</button></td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit List</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="groceryList" (ngSubmit)="onSubmit()">
+                  <div class="form-group">
+                      <!--Grocery List Name-->
+                      <div class="form-group row">  
+                          <label for="groceryName" class="col-3 col-form-label">List Name</label>
+                          <div class="col-9">
+                              <input class="form-control" type="text"  formControlName="listName"
+                              placeholder="Enter name">
+                          </div>
+                      </div>
+  
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Modal -->
+<div class="modal fade" id="createGroceryList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create List</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="groceryList" (ngSubmit)="createGroceryList()">
+                  <div class="form-group">
+                      <!--Grocery List Name-->
+                      <div class="form-group row">  
+                          <label for="groceryName" class="col-3 col-form-label">List Name</label>
+                          <div class="col-9">
+                              <input class="form-control" type="text"  formControlName="listName"
+                              placeholder="Enter name">
+                          </div>
+                      </div>
+  
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
